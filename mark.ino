@@ -61,6 +61,27 @@ void loop() {
       fsrForce = fsrConductance - 1000;
       fsrForce /= 30;          
     }
+  if(count==0){
+    value=fsrForce+0;
+  }
+  
+  if(gas>85)
+  { Serial.println("Possible gas leak");}  /*In case other sensors fails,
+  this ensures at least giving a warning. 
+  */
+  
+  if(temp>44)
+  {
+    Serial.println("Flame on ");
+    if(gas>85)
+    {
+      Serial.println("Gas presence in atmosphere detected ");
+      if(val>0)
+      {
+        Serial.println("Flame on but gas presence in atmosphere detected. Switch off burners immediately");
+      }
+    }
+  }
   
   delay(10000); // update sensors readings each ten seconds
 }
