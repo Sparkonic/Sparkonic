@@ -82,6 +82,46 @@ void loop() {
       }
     }
   }
+  else
+   { 
+     Serial.print("No flame detected");
+    if(gas>85)
+    { 
+      if(val>0)
+      {
+        
+        if((fsrForce-value)<0)
+        {
+          Serial.println("Gas leakage confirmed. Check gas stove regulators immediately");
+        }
+      }
+      else
+      {
+        Serial.println("Gas leakage detected");
+      }
+    }
+  }
+ 
+  
+  count=count+1;
+  
+  
+  
+  Serial.println("Weight of Cylinder: ");
+  Serial.println(fsrForce);
+  if((fsrForce-weight)<1&&(fsrForce-weight)>0)
+  {
+    Serial.println("Cylinder is getting empty. Book a new cylinder asap");
+  }
+  if((fsrForce-weight)==0)
+  {
+    Serial.println("Cylinder is empty. Book a new cylinder immediately");
+  }
+  
+  
+  
+  Serial.println();
+  value=fsrForce;
   
   delay(10000); // update sensors readings each ten seconds
 }
